@@ -3,6 +3,7 @@
  * 
  * @package Zoom Learning Platform
  * @subpackage M. Sufyan Shaikh
+
  * 
  */
 
@@ -22,22 +23,12 @@ function createAllTables()
             $charset_collate = $wpdb->get_charset_collate();
 
             $createTablePlugin = "CREATE TABLE $table_plugin  (
-                id int(11) NOT NULL AUTO_INCREMENT,
-                userAddress varchar(150) NOT NULL,
-                userState varchar(150) NOT NULL,
-                userCountry varchar(150) NOT NULL,
-                userAddress varchar(150) NOT NULL,
-                email varchar(150) NOT NULL,
-                phone int(11) NOT NULL,
-                nonce varchar(50) NOT NULL,
-                paymentStatus varchar(50) NOT NULL DEFAULT 0,
-                currentDate timestamp NOT NULL DEFAULT current_timestamp(),
-                price float(10,2) NOT NULL,
+                id int(11) NOT NULL AUTO_INCREMENT, 
                 PRIMARY KEY  (id)
             ) $charset_collate;";
 
             require_once ABSPATH . "wp-admin/includes/upgrade.php";
-            dbDelta($createTablePlugin);
+            dbDelta($createTablePlugin);    
 
         } catch (\Throwable $erro) {
             error_log($erro->getMessage());
@@ -72,4 +63,5 @@ function removeAllTables()
         error_log($erro->getMessage());
         return $erro;
     }
+
 }
