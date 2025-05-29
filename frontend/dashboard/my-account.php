@@ -90,15 +90,18 @@ function zoom_my_account_dashboard()
                     <div class="classesPanel">
                         <div class="classesBox">
                             <div class="thumbnail">
-                                <img src="" alt="">
+                                <img src="https://img-c.udemycdn.com/course/240x135/3142166_a637_3.jpg" alt="">
                             </div>
                             <h3>Class title</h3>
                             <p class="authorBox">
-                                Instructor Name
+                                Category Name
                             </p>
-                            <p class="duration">30 min</p>
-                            <p class="pricing">€ 15.99</p>
-                            <a href="#">View Details</a>
+                            <p class="duration">Duration: 30 min</p>
+                            <p class="pricing">Price: € 15.99</p>
+                            <div class="actionsPanel">
+                                <a href="#">Edit Details</a>
+                                <a href="#">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,26 +133,38 @@ function zoom_my_account_dashboard()
                 <!-- Create Class Tab -->
                 <div class="zoom-tab-content" id="zoom-tab-create-class" style="display:none;">
                     <h3>Create New Class</h3>
+
                     <form id="zoom-create-class-form">
-                        <label>Class Title:<br>
-                            <input type="text" name="class_title" required>
-                        </label><br><br>
+                        <label>Meeting Title</label>
+                        <input type="text" name="class_title" required>
 
-                        <label>Description:<br>
-                            <textarea name="class_description" required></textarea>
-                        </label><br><br>
+                        <label>Class Description</label>
+                        <textarea name="class_description" rows="4" required></textarea>
 
-                        <label>Start Date & Time:<br>
-                            <input type="datetime-local" name="class_start_time" required>
-                        </label><br><br>
+                        <label>Start Date</label>
+                        <input type="datetime-local" name="start_date" required>
 
-                        <label>Price ($):<br>
-                            <input type="number" name="class_price" min="0" step="0.01">
-                        </label><br><br>
+                        <label>Timezone</label>
+                        <select name="timezone" required>
+                            <?php foreach (timezone_identifiers_list() as $tz): ?>
+                                <option value="<?php echo esc_attr($tz); ?>"><?php echo esc_html($tz); ?></option>
+                            <?php endforeach; ?>
+                        </select>
 
-                        <button type="submit">Create Class</button>
-                        <div id="zoom-create-class-response"></div>
+                        <label>Duration (Hours)</label>
+                        <input type="number" name="option_duration_hour" min="0" max="10" value="1" required>
+
+                        <label>Duration (Minutes)</label>
+                        <input type="number" name="option_duration_minutes" min="0" max="59" value="0" required>
+
+                        <label>Meeting Password</label>
+                        <input type="text" name="password" value="<?php echo wp_generate_password(8, false); ?>" required>
+
+                        <input type="submit" name="create_zoom_meeting" value="Create Meeting">
                     </form>
+
+                    <div id="zoom-create-class-response" style="margin-top: 10px;"></div>
+
                 </div>
 
                 <!-- Students Tab -->

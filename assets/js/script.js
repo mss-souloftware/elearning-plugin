@@ -49,5 +49,25 @@
                 }
             });
         });
+
+
+        $('#zoom-create-class-form').on('submit', function (e) {
+            e.preventDefault();
+
+            const formData = $(this).serialize() + '&action=zoom_create_class&security=' + ajax_variables.nonce;
+
+
+            $.post(ajax_variables.ajax_url, formData, function (res) {
+                if (res.success) {
+                    $('#zoom-create-class-response').html('<span style="color:green;">' + res.data.message + '</span>');
+                } else {
+                    $('#zoom-create-class-response').html('<span style="color:red;">' + res.data.message + '</span>');
+                }
+            }).fail(function () {
+                $('#zoom-create-class-response').html('<span style="color:red;">AJAX failed. Server returned 0 or error.</span>');
+            });
+        });
+
+
     });
 }(jQuery))

@@ -14,6 +14,7 @@ function zoom_custom_register_form()
 {
     ob_start();
     ?>
+    <h2>Register</h2>
     <form id="zoom-register-form">
         <input type="text" name="fullname" placeholder="Full Name" required><br>
         <input type="text" name="username" placeholder="Username" required><br>
@@ -30,8 +31,9 @@ function zoom_custom_register_form()
 
         <input type="hidden" name="action" value="zoom_register_user">
         <input type="hidden" name="security" value="<?php echo esc_attr(wp_create_nonce('frontend_nonce')); ?>">
-
-        <button type="submit">Register</button>
+        <div class="submitWrapper">
+            <button type="submit">Register</button>
+        </div>
         <div id="zoom-register-response"></div>
     </form>
     <?php
